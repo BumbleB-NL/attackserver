@@ -5,7 +5,7 @@ from server.models import FlagStatus, SubmitResult
 RESPONSES = {
     FlagStatus.QUEUED: ['queued'],
     FlagStatus.ACCEPTED: ['success'],
-    FlagStatus.REJECTED: ['wrong flag!', 'resource not found!', "please don't submit flag repeatedly."],
+    FlagStatus.REJECTED: ['incorrect flag', 'submission failed', 'please do not submit the flag repeatedly', 'self-submission', 'incorrect flag for this round'],
 }
 
 # Timeout in seconds for the requests
