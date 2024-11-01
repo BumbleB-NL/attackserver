@@ -1,0 +1,22 @@
+# Use an official Python runtime as a parent image
+FROM python:3.13-slim
+
+# Set the working directory in the container
+#USER root
+WORKDIR /usr/src/app
+
+# Copy the current directory contents into the container at /usr/src/app
+COPY ./ ./server
+
+# Install any required dependencies
+# If you have a requirements.txt file, you can use this line:
+RUN pip install --no-cache-dir -r /usr/src/app/server/requirements.txt
+
+# Set environment variable (you can override this at runtime)
+# ENV SERVER_PASSWORD=default_password
+
+RUN chmod +x server/start_server.sh
+
+#CMD ["ls", "-la", "./"]
+# Run your Python program when the container starts
+CMD ["/bin/sh", "/usr/src/app/server/start_server.sh" ]

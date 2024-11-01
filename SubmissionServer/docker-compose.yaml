@@ -1,0 +1,28 @@
+services:
+  exploit_farm:
+    image: exploit_farm
+    container_name: exploit_farm
+    environment:
+      # CTF platform specifics
+      - FLAG_FORMAT=A&D\{[a-f0-9]{40}\}
+      - SYSTEM_PROTOCOL=cardinal
+      - SYSTEM_URL=http://192.168.169.5:19999/api/flag
+      - SYSTEM_TOKEN=239843ca3eae2eff041bb9b9decf9b23
+      # Submission attempt settings
+      - SUBMIT_FLAG_LIMIT=50
+      - SUBMIT_PERIOD=5
+      - FLAG_LIFETIME=300
+      # Local server settings
+      - SERVER_PASSWORD=123 # <--- CHANGE ME
+      - ENABLE_API_AUTH=False
+      - API_TOKEN=
+    ports:
+      - "80:5000"
+    volumes:
+      # The teams.csv file contains a list of team machines that will be exploited
+      - ./teams.csv:/etc/exploitfarm/config/teams.csv
+      # Persistent data after restarting exploitfarm server
+      - data:/usr/src/app/server/
+
+volumes:
+  data:
